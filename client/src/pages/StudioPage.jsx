@@ -5,6 +5,8 @@ import { cities, categories, initialClasses, readClasses, saveClasses } from "..
 import { api } from "../api";
 const money = (n) => `₹${Number(n).toLocaleString("en-IN")}`;
 const safeImg = "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?auto=format&fit=crop&w=900&q=80";
+import ClassCard from "../components/ClassCard.jsx";
+import NotFound from "./NotFound.jsx";
 
 function StudioPage({ classes }) {
   const { studio } = useParams();
