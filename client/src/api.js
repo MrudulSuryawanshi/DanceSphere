@@ -2,7 +2,7 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
 async function request(path, options = {}) {
   const response = await fetch(`${API_BASE}${path}`, {
-    headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+    headers: { 'Content-Type': 'application/json', ...(localStorage.getItem('ds_token') ? { Authorization: `Bearer ${localStorage.getItem('ds_token')}` } : {}), ...(options.headers || {}) },
     ...options,
     body: options.body && typeof options.body !== 'string' ? JSON.stringify(options.body) : options.body
   });
@@ -19,5 +19,7 @@ export const api = {
   classById: id => request(`/classes/${id}`),
   register: data => request('/auth/register', { method: 'POST', body: data }),
   login: data => request('/auth/login', { method: 'POST', body: data }),
-  createEnquiry: data => request('/enquiries', { method: 'POST', body: data })
+  createEnquiry: data => request('/enquiries', { method: 'POST', body: data }),
+  adminUsers: () => request('/admin/users'),
+  adminStats: () => request('/admin/stats')
 };
