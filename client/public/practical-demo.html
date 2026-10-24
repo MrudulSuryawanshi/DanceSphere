@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>HTML, CSS & JavaScript Practical — DanceSphere</title>
+<style>
+:root{font-family:Arial,sans-serif;color:#342d25;background:#f5f0e7;--terra:#b95f45;--paper:#fffdf8;--line:#ded7ca}*{box-sizing:border-box}body{margin:0}.wrap{max-width:900px;margin:auto;padding:32px 20px}header{background:#e7dfd2;padding:24px;border-bottom:1px solid var(--line)}h1,h2{font-family:Georgia,serif;font-weight:500}h1{font-size:clamp(32px,5vw,48px)}.card{background:var(--paper);padding:22px;border:1px solid var(--line);margin:18px 0}button{padding:10px 15px;background:var(--terra);color:white;border:0;cursor:pointer}input,select{padding:10px;border:1px solid #cfc5b7;background:white}li{padding:4px}img{width:100%;max-height:300px;object-fit:cover}.notice{color:#737b58;font-weight:bold}.layout{display:grid;grid-template-columns:1fr 1fr;gap:15px}@media(max-width:600px){.layout{grid-template-columns:1fr}}
+</style></head>
+<body><header><div class="wrap"><p> DANCESPHERE · PRACTICAL LAB </p><h1>HTML, CSS & JavaScript</h1><p>A small standalone page for demonstrating core syllabus concepts.</p></div></header><main class="wrap">
+<section class="card"><h2>1. Headings, lists and image</h2><h3>Dance styles to try</h3><ul><li>Bollywood</li><li>Hip-Hop</li><li>Contemporary</li></ul><img src="https://images.unsplash.com/photo-1504609813442-a8924e83f76e?auto=format&fit=crop&w=1000&q=80" alt="Dance class"></section>
+<section class="card"><h2>2. Semantic HTML</h2><p>This page uses <code>header</code>, <code>main</code>, <code>section</code>, <code>article</code> and <code>footer</code> elements.</p></section>
+<div class="layout"><section class="card"><h2>3. DOM event</h2><p id="eventText">Click the button to change this message.</p><button id="changeButton">Change message</button></section>
+<section class="card"><h2>4. Array functions</h2><p>Choose a style to filter a JavaScript array.</p><select id="styleSelect"><option>All</option><option>Bollywood</option><option>Hip-Hop</option><option>Classical</option></select><ul id="styleResults"></ul></section></div>
+<section class="card"><h2>5. Form validation</h2><form id="demoForm"><label>Name <input id="demoName" required minlength="2"></label> <label>Email <input id="demoEmail" type="email" required></label> <button>Validate</button></form><p id="formMessage" aria-live="polite"></p></section>
+</main><footer class="wrap"><p>DanceSphere academic project · Responsive CSS Grid and media queries included.</p></footer>
+<script>
+const styles=['Bollywood','Hip-Hop','Classical','Contemporary'];
+document.querySelector('#changeButton').addEventListener('click',()=>{document.querySelector('#eventText').textContent='Nice! The DOM was updated using a JavaScript click event.';});
+function renderStyles(){const selected=document.querySelector('#styleSelect').value;const shown=styles.filter(style=>selected==='All'||style===selected);document.querySelector('#styleResults').innerHTML=shown.map(s=>`<li>${s}</li>`).join('');}
+document.querySelector('#styleSelect').addEventListener('change',renderStyles);renderStyles();
+document.querySelector('#demoForm').addEventListener('submit',e=>{e.preventDefault();const name=document.querySelector('#demoName').value.trim();const email=document.querySelector('#demoEmail').value.trim();document.querySelector('#formMessage').textContent=name.length>=2&&email.includes('@')?'Looks good — the form passed basic validation.':'Please check the fields.';});
+</script></body></html>
